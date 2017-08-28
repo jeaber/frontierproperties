@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   NgModule,
   ApplicationRef
@@ -24,13 +26,35 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
 
-import '../styles/styles.scss';
-import '../styles/headings.css';
+import { HomeComponent } from './home';
+// import { AboutComponent } from './about';
+import { NoContentComponent } from './no-content';
+// import { XLargeDirective } from './home/x-large';
+
+// import '../styles/styles.scss';
+// import '../styles/headings.css';
+// Must export the config
+import { Admin } from './admin';
+import { ScrollToModule } from 'ng2-scroll-to';
+import { Pinecity, Availability, Photos, Contact, Amenities } from './pinecity';
+import { Mora, PhotosMora, AmenitiesMora, AvailabilityMora } from './mora';
+
+import { MdCardModule, MdInputModule } from '@angular/material';
+
+import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+
+export const firebaseConfig = {
+  apiKey: 'AIzaSyBZ63LpB90pGKlC2jUz_Rpx2Gv-nUECFAQ',
+  authDomain: 'frontier-properties.firebaseapp.com',
+  databaseURL: 'https://frontier-properties.firebaseio.com',
+  storageBucket: 'frontier-properties.appspot.com'
+};
+
+const myFirebaseAuthConfig = {
+  provider: AuthProviders.Google,
+  method: AuthMethods.Redirect
+}
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -51,19 +75,28 @@ type StoreType = {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
-    AboutComponent,
+    Pinecity, Availability, Photos, Amenities,
+    Mora,PhotosMora, AvailabilityMora, AmenitiesMora,
+    Admin,
+    
+    // AboutComponent,
     HomeComponent,
     NoContentComponent,
-    XLargeDirective
+    // XLargeDirective
+    
   ],
   /**
    * Import Angular's modules.
    */
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    ScrollToModule.forRoot(),    
+    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+    MdCardModule, MdInputModule
   ],
   /**
    * Expose our Services and Providers into Angular's dependency injection.

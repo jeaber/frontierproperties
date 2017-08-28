@@ -1,0 +1,32 @@
+<section id="contact">
+	<h2>Application and Contact</h2>
+	<p>
+		There is a $60 background-check fee per tenant (if an application doesn't reach the background check process, this fee will
+		be refunded.) All residents are screened before their tenancy begins, ensuring safe and comfortable living arrangements
+		for all. Please call or check our website for availability.</p>
+	<p>
+		If there is nothing available you may still submit an online waiting list request.
+	</p>
+	<form (ngSubmit)="onSubmit()">
+		<div>
+			<div class="form-group">
+				<md-input [(ngModel)]="form.name" placeholder="Name" required name="name"></md-input>
+				<md-input [(ngModel)]="form.date" placeholder="Move in date" name="date"></md-input>
+				<md-input [(ngModel)]="form.email" placeholder="Email" required name="email"></md-input>
+				<md-input [(ngModel)]="form.phone" placeholder="Phone" required name="phone"></md-input>
+			</div>
+
+			<div style="clear:both;">
+				<label>Message*</label>
+				<textarea required [(ngModel)]="form.message" name="message" rows="5" style="width:100%;"></textarea>
+			</div>
+
+			<div class="center" style="width:100%;margin-top:1em;">
+				<button [disabled]="!form.valid" class="btn" type="submit">Submit</button>
+			</div>
+		</div>
+	</form>
+	<div id="message-sent">
+		<p>Sending...<i class="fa fa-spinner fa-pulse"></i></p>
+	</div>
+</section>

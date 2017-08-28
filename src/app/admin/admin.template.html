@@ -1,0 +1,90 @@
+<section style="max-width: 70em;overflow:auto">
+	<div id="button-group">
+		<button class="btn" md-raised-button *ngIf="!(af.auth | async)?.uid" (click)="login()">Login</button>
+		<button class="btn" md-raised-button *ngIf="(af.auth | async)?.uid" (click)="logout()">Logout</button>
+	</div>
+	<div *ngIf="(af.auth | async)?.uid" id="button-group">
+		<button class="btn" md-button (click)="loadPinecity()">Pine City</button>
+		<button class="btn" md-button (click)="loadMora()">Mora</button>
+	</div>
+	<form *ngIf="(af.auth | async)?.uid" (ngSubmit)="onSave()" #adminForm="ngForm">
+		<h1>{{cityString()}}</h1>
+		<md-card>
+			<h2>General Texts</h2>
+			<div class="textarea">
+				<label for="name">Welcome Text</label>
+				<md-input-container>
+					<textarea mdInput [(ngModel)]="form.welcomeText" name="welcomeText" id="name" rows="5" cols=""></textarea>
+				</md-input-container>
+			</div>
+			<div class="textarea">
+				<label for="neighborhoodText">Neighborhood and Directions</label>
+				<md-input-container>
+					<textarea mdInput [(ngModel)]="form.neighborhoodText" name="neighborhoodText" id="neighborhoodText" rows="5" cols=""></textarea>
+				</md-input-container>
+			</div>
+		</md-card>
+		<md-card>
+			<h2>Amenities</h2>
+			<md-input-container>
+				<input mdInput [(ngModel)]="form.amenities.paragraphOne" placeholder="Paragraph One" name="amenitiesOne">
+			</md-input-container>
+			<md-input-container>
+				<input mdInput [(ngModel)]="form.amenities.paragraphTwo" placeholder="Paragraph Two" name="amenitiesTwo">
+			</md-input-container>
+		</md-card>
+
+		<md-card>
+			<h2>Availability</h2>
+			<md-input-container>
+				<input mdInput [(ngModel)]="form.rooms.subtext" placeholder="Rooms subtext" name="aSubtext">
+			</md-input-container>
+			<md-input-container>
+				<span md-suffix>sqft</span>
+				<input mdInput [(ngModel)]="form.rooms.single.sqft" name="aSsqft" placeholder="1/1 sqft">
+			</md-input-container>
+			<md-input-container>
+				<span md-suffix>sqft</span>
+				<input mdInput [(ngModel)]="form.rooms.double.sqft" name="aDsqft " placeholder="2/1 sqft ">
+			</md-input-container>
+
+		</md-card>
+		<button class="btn" md-raised-button type="submit" [disabled]="!data" style="display: block;margin:auto;">Save</button>
+
+	</form>
+
+
+	<div *ngIf="(af.auth | async)?.uid" class="card-half">
+		<md-card style="width: 20em">
+			<h1>{{cityString()}}</h1>
+			<h3>Availability lists</h3>
+			<div class="half">
+				<h4>Single</h4>
+				<ul>
+					<li *ngFor="let listing of singleListings | async">
+						{{ listing.$value }}
+						<button (click)="singleListings.remove(listing.$key)">Remove</button>
+					</li>
+				</ul>
+				<md-input-container>
+					<input mdInput #single [(ngModel)]="pushSingle" placeholder="Add single room">
+				</md-input-container>
+				<button class="btn" [disabled]="!single" (click)="singleListings.push(pushSingle)">Add</button>
+			</div>
+
+			<div class="half">
+				<h4>Double</h4>
+				<ul>
+					<li *ngFor="let listing of doubleListings | async">
+						{{ listing.$value }}
+						<button (click)="doubleListings.remove(listing.$key)">Remove</button>
+					</li>
+				</ul>
+				<md-input-container>
+					<input mdInput #double [(ngModel)]="pushDouble" [ngModelOptions]="{standalone: true}" placeholder="Add double room">
+				</md-input-container>
+				<button class="btn" [disabled]="!double" (click)="doubleListings.push(pushDouble)">Add</button>
+			</div>
+		</md-card>
+	</div>
+</section>
