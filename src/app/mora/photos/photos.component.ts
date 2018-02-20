@@ -22,7 +22,7 @@ export class PhotosMora {
     this.data = fd.pinecity;
     this.isMore = "More";
     this.urls = [
-      "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/7.png",
+/*       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/7.png",
       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/5.png",
       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/4.png",
       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/1.png",
@@ -31,8 +31,24 @@ export class PhotosMora {
       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/3.png",
       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/6.png",
       "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/8.png",
-      "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/9.png"
+      "http://res.cloudinary.com/dm6rsngpq/image/upload/v1503000520/mora/9.png" */
+      "assets/img/mora/01.jpg",
+      "assets/img/mora/02.jpg",
+      "assets/img/mora/03.jpg",
+      "assets/img/mora/04.jpg",
+      //"assets/img/mora/2.png",
+      "assets/img/mora/6.png",
+      "assets/img/mora/1.png",
+      "assets/img/mora/3.png",
+      "assets/img/mora/7.png",
+      //"assets/img/mora/4.png",
+      "assets/img/mora/5.png",
+      //"assets/img/mora/8.png",
+      "assets/img/mora/9.png",
+      
+      
     ];
+
     this.active = this.urls.slice(0, 3);
   }
   toggleMore() {
